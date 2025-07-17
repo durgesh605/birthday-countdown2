@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Countdown</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(#a20059, #ff2975);
+      color: #fff;
+      font-family: 'Brush Script MT', cursive;
+      text-align: center;
+    }
+
+    h1, h2, h3 {
+      margin: 20px 0;
+      color: #fff066;
+      text-shadow: 0 0 10px #ffdd66, 0 0 20px #ffcc33;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      font-size: 3em;
+      color: #fff066;
+      text-shadow: 0 0 10px #ffd700;
+    }
+
+    .countdown div {
+      text-align: center;
+    }
+
+    .label {
+      font-size: 0.4em;
+      display: block;
+      margin-top: 5px;
+      color: #ffe4b2;
+    }
+
+    .emoji {
+      font-size: 1.5em;
+      margin: 10px;
+    }
+
+    .birthday-msg {
+      font-size: 2.5em;
+      margin-top: 30px;
+      color: #fff066;
+      text-shadow: 0 0 10px #ffcc66;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background-image: url('https://i.imgur.com/UDMnr86.png'); /* Optional hearts BG */
+      background-repeat: repeat;
+      opacity: 0.1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="emoji">🎉 Birthday Countdown 🎉</div>
+
+  <div class="countdown">
+    <div>
+      <span id="days">0</span>
+      <span class="label">Days</span>
+    </div>
+    <div>
+      <span id="hours">0</span>
+      <span class="label">Hours</span>
+    </div>
+    <div>
+      <span id="minutes">0</span>
+      <span class="label">Minutes</span>
+    </div>
+  </div>
+
+  <div class="birthday-msg">
+    🎂 Happy Birthday! 🎂
+  </div>
+
+  <!-- Optional background hearts -->
+  <div class="hearts"></div>
+
+  <script>
+    // Set your birthday date here
+    const birthday = new Date("July 18, 2025 00:00:00").getTime();
+
+    const timer = setInterval(function() {
+      const now = new Date().getTime();
+      const distance = birthday - now;
+
+      let days = 0, hours = 0, minutes = 0;
+
+      if (distance > 0) {
+        days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      }
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+
+      if (distance <= 0) {
+        clearInterval(timer);
+        document.querySelector(".countdown").innerHTML = "<h2>It's Time! 🎉</h2>";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
